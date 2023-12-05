@@ -13,7 +13,7 @@ namespace ProjetTp.Models
         [Required]
         public float Price { get; set; }
         [Required]
-        public DateOnly ExpiryDate { get; set; }
+        public DateTime ExpiryDate { get; set; }
         [ForeignKey("Fabriquant")]
         public int FabriquantId { get; set; }
         [ForeignKey("Format")]
