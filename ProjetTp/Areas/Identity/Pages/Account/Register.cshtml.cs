@@ -7,10 +7,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using Humanizer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -21,6 +24,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using NuGet.Packaging.Signing;
 using ProjetTp.Areas.Identity.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjetTp.Areas.Identity.Pages.Account
 {
@@ -138,7 +142,6 @@ namespace ProjetTp.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -151,13 +154,16 @@ namespace ProjetTp.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
+                    
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                      SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    Console.WriteLine("avant if");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        
                     }
                     else
                     {
@@ -174,7 +180,29 @@ namespace ProjetTp.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+        private async Task<bool> SendEmailAsync(string email, string subject,string confirmLink)
+        {
+            string mail = "jihenmkhinini4070@gmail.com";
+            string pwd = "bgyd qdxq exvy ruis";
+            MailMessage message = new MailMessage();
+            message.From =new MailAddress(mail);
+            message.To.Add(new MailAddress(email));
+            message.Subject = subject;
+            message.Body =confirmLink;
+            message.IsBodyHtml = true;
+            var client = new SmtpClient("smtp.gmail.com", 587)
 
+            {
+                EnableSsl = true,
+                Credentials = new NetworkCredential(mail, pwd),
+            };
+            await client.SendMailAsync(message);
+            Console.WriteLine("Sent");
+            Console.ReadLine();
+
+            return true;
+
+        }
         private ApplicationUser CreateUser()
         {
             try
