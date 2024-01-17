@@ -22,11 +22,20 @@ namespace ProjetTp.Controllers
         // GET: FabriquantController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
-        }
 
-        // GET: FabriquantController/Create
-        public ActionResult Create()
+            // Assuming _context is your database context
+            Fabriquant fabriquant = _context.Fabriquants.Find(id);
+
+            if (fabriquant == null)
+            {
+                return NotFound(); // Or another appropriate action for a not found result
+            }
+
+            return View(fabriquant);
+        } 
+
+    // GET: FabriquantController/Create
+    public ActionResult Create()
         {
             return View();
         }
