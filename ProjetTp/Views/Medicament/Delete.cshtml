@@ -1,4 +1,4 @@
-﻿@model ProjetTp.Models.Medicament
+﻿@model ProjetTp.Models.MedicamentJoinResult
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,39 +12,39 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Medicament.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Medicament.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Medicament.Price)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Medicament.Price)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ExpiryDate)
+            @Html.DisplayNameFor(model => model.Medicament.ExpiryDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ExpiryDate)
+            @Html.DisplayFor(model => model.Medicament.ExpiryDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FabriquantId)
+            Fabriquant
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FabriquantId)
+            @Html.DisplayFor(model => model.Fabriquant.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FormatId)
+            Format
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FormatId)
+            @Html.DisplayFor(model => model.Format.Name)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Medicament.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

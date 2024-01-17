@@ -133,25 +133,38 @@ namespace ProjetTp.Controllers
         // GET: MedicamentController/Delete/5
         public ActionResult Delete(Guid id)
         {
-            var medicament = _context.Medicaments.Find(id);
-
-            if (medicament == null)
+            var query = from medicament in _context.Medicaments
+                        join format in _context.Formats on medicament.FormatId equals format.Id
+                        join fabriquant in _context.Fabriquants on medicament.FabriquantId equals fabriquant.Id
+                        where id == medicament.Id
+                        select new MedicamentJoinResult
+                        {
+                            Medicament = medicament,
+                            Format = format,
+                            Fabriquant = fabriquant
+                        };
+            var result = query.FirstOrDefault();
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return View(medicament);
+            return View(result);
         }
 
         // POST: MedicamentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Guid id, Medicament collection)
+        public ActionResult Delete(Guid id, Medicament medicament, string FormatName, string FabriquantName)
         {
-            var medicament = _context.Medicaments.Find(id);
+            var format = _context.Formats.FirstOrDefault(f => f.Name == FormatName);
+            var fabriquant = _context.Fabriquants.FirstOrDefault(f => f.Name == FabriquantName);
 
-            if (medicament != null)
+            if (format != null && fabriquant != null)
             {
+                // Assigner les identifiants au modèle
+                medicament.FormatId = format.Id;
+                medicament.FabriquantId = fabriquant.Id;
                 _context.Medicaments.Remove(medicament);
                 _context.SaveChanges();
             }
