@@ -1,4 +1,4 @@
-﻿@model ProjetTp.Models.Medicament
+﻿@model ProjetTp.Models.MedicamentJoinResult
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,33 +12,34 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Medicament.Id" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Medicament.Name" class="control-label"></label>
+                <input asp-for="Medicament.Name" class="form-control" />
+                <span asp-validation-for="Medicament.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                <label asp-for="Medicament.Price" class="control-label"></label>
+                <input asp-for="Medicament.Price" class="form-control" />
+                <span asp-validation-for="Medicament.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ExpiryDate" class="control-label"></label>
-                <input asp-for="ExpiryDate" class="form-control" />
-                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                <label asp-for="Medicament.ExpiryDate" class="control-label"></label>
+                <input asp-for="Medicament.ExpiryDate" class="form-control" />
+                <span asp-validation-for="Medicament.ExpiryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FabriquantId" class="control-label"></label>
-                <input asp-for="FabriquantId" class="form-control" />
-                <span asp-validation-for="FabriquantId" class="text-danger"></span>
+                <label asp-for="Fabriquant.Name" class="control-label">Fabriquant</label>
+                <input asp-for="Fabriquant.Name" class="form-control" />
+                <span asp-validation-for="Fabriquant.Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="FormatId" class="control-label"></label>
-                <input asp-for="FormatId" class="form-control" />
-                <span asp-validation-for="FormatId" class="text-danger"></span>
+                <label asp-for="Format.Name" class="control-label">Format</label>
+                <input asp-for="Format.Name" class="form-control" />
+                <span asp-validation-for="Format.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+                <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

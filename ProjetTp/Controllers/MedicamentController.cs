@@ -8,30 +8,52 @@ namespace ProjetTp.Controllers
     public class MedicamentController : Controller
 
     {
-        private readonly AppDbContext _context; // Assuming you have a DbContext named ApplicationDbContext
-
+        private readonly AppDbContext _context;
+        private readonly IQueryable<MedicamentJoinResult> query;
         public MedicamentController(AppDbContext context)
         {
             _context = context;
+            query = from medicament in _context.Medicaments
+                    join format in _context.Formats on medicament.FormatId equals format.Id
+                    join fabriquant in _context.Fabriquants on medicament.FabriquantId equals fabriquant.Id
+                    select new MedicamentJoinResult
+                    {
+                        Medicament = medicament,
+                        Format = format,
+                        Fabriquant = fabriquant
+                    };
         }
         // GET: MedicamentController
         public ActionResult Index()
         {
-            var medicaments = _context.Medicaments.ToList();
-            return View(medicaments);
+            var result = query.ToList();
+
+            // medicaments = _context.Medicaments.;
+            return View(result);
         }
 
         // GET: MedicamentController/Details/5
         public ActionResult Details(Guid id) 
         {
-            var medicament = _context.Medicaments.Find(id);
+            var query = from medicament in _context.Medicaments
+                    join format in _context.Formats on medicament.FormatId equals format.Id
+                    join fabriquant in _context.Fabriquants on medicament.FabriquantId equals fabriquant.Id
+                    where id == medicament.Id
+                    select new MedicamentJoinResult
+                    {
+                        Medicament = medicament,
+                        Format = format,
+                        Fabriquant = fabriquant
+                    };
+            var result = query.FirstOrDefault();
+            //var medicament = _context.Medicaments.Find(id);
 
-            if (medicament == null)
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return View(medicament);
+            return View(result);
         }
 
         // GET: MedicamentController/Create
@@ -43,39 +65,63 @@ namespace ProjetTp.Controllers
         // POST: MedicamentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Medicament medicament)
+        public ActionResult Create(Medicament medicament, string FormatName, string FabriquantName)
         {
             if (ModelState.IsValid)
             {
+                var format = _context.Formats.FirstOrDefault(f => f.Name == FormatName);
+            var fabriquant = _context.Fabriquants.FirstOrDefault(f => f.Name == FabriquantName);
+
+            if (format != null && fabriquant != null)
+            {
+                // Assigner les identifiants au modèle
+                medicament.FormatId = format.Id;
+                medicament.FabriquantId = fabriquant.Id;
+
                 _context.Medicaments.Add(medicament);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            }
             return View(medicament);
         }
 
         // GET: MedicamentController/Edit/5
         public ActionResult Edit(Guid id)
         {
-            var medicament = _context.Medicaments.Find(id);
-
-            if (medicament == null)
+            //var medicament = _context.Medicaments.Find(id);
+            var query = from medicament in _context.Medicaments
+                        join format in _context.Formats on medicament.FormatId equals format.Id
+                        join fabriquant in _context.Fabriquants on medicament.FabriquantId equals fabriquant.Id
+                        where id == medicament.Id
+                        select new MedicamentJoinResult
+                        {
+                            Medicament = medicament,
+                            Format = format,
+                            Fabriquant = fabriquant
+                        };
+            var result = query.FirstOrDefault();
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return View(medicament);
+            return View(result);
         }
 
         // POST: MedicamentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, Medicament medicament)
+        public ActionResult Edit(Guid id, Medicament medicament,string FormatName, string FabriquantName)
         {
+            var format = _context.Formats.FirstOrDefault(f => f.Name == FormatName);
+            var fabriquant = _context.Fabriquants.FirstOrDefault(f => f.Name == FabriquantName);
 
-            if (ModelState.IsValid)
+            if (format != null && fabriquant != null)
             {
+                // Assigner les identifiants au modèle
+                medicament.FormatId = format.Id;
+                medicament.FabriquantId = fabriquant.Id;
                 _context.Update(medicament);
                 _context.SaveChanges();
                 return RedirectToAction("Index");

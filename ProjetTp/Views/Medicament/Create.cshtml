@@ -28,15 +28,23 @@
                 <span asp-validation-for="ExpiryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FabriquantId" class="control-label"></label>
-                <input asp-for="FabriquantId" class="form-control" />
-                <span asp-validation-for="FabriquantId" class="text-danger"></span>
+                <label for="FabriquantName" class="control-label">Fabriquant Name</label>
+                <input type="text" id="FabriquantName" name="FabriquantName" class="form-control" />
+                <span class="text-danger">
+                    <!-- You might not need this span if you're not displaying validation errors without ASP.NET Core Tag Helpers -->
+                    <!-- Validation error message goes here -->
+                </span>
             </div>
+
             <div class="form-group">
-                <label asp-for="FormatId" class="control-label"></label>
-                <input asp-for="FormatId" class="form-control" />
-                <span asp-validation-for="FormatId" class="text-danger"></span>
+                <label for="FormatName" class="control-label">Format Name</label>
+                <input type="text" id="FormatName" name="FormatName" class="form-control" />
+                <span class="text-danger">
+                    <!-- You might not need this span if you're not displaying validation errors without ASP.NET Core Tag Helpers -->
+                    <!-- Validation error message goes here -->
+                </span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
