@@ -1,0 +1,2 @@
+﻿database sabaa : Server=DESKTOP-ML9UTQI;Database=Projet
+databse arij : Server=ARIJTH;Database=ProjetDotnet
