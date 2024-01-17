@@ -1,5 +1,3 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.Server;
 using ProjetTp.Models;
@@ -7,7 +5,6 @@ using Format = ProjetTp.Models.Format;
 
 namespace ProjetTp.Controllers
 {
-    [Authorize]
     public class FormatController : Controller
     {
         private readonly AppDbContext _context;

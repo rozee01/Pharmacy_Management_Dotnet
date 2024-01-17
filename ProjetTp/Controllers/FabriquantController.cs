@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using ProjetTp.Models;
 
 namespace ProjetTp.Controllers
 {
-    [Authorize]
     public class FabriquantController : Controller
     {
         private readonly AppDbContext _context;

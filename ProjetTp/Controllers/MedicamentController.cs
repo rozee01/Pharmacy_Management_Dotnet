@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProjetTp.Models;
 
 namespace ProjetTp.Controllers
 {
-    [Authorize]
     public class MedicamentController : Controller
 
     {
@@ -23,7 +20,6 @@ namespace ProjetTp.Controllers
         }
 
         // GET: MedicamentController/Details/5
-        public ActionResult Details(int id)
         {
             var medicament = _context.Medicaments.Find(id);
 
@@ -57,17 +53,24 @@ namespace ProjetTp.Controllers
         }
 
         // GET: MedicamentController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var medicament = _context.Medicaments.Find(id);
+
+            if (medicament == null)
+            {
+                return NotFound();
+            }
+
+            return View(medicament);
         }
 
         // POST: MedicamentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Medicament medicament)
+        public ActionResult Edit(Guid id, Medicament medicament)
         {
-         
+
             if (ModelState.IsValid)
             {
                 _context.Update(medicament);
@@ -79,7 +82,7 @@ namespace ProjetTp.Controllers
         }
 
         // GET: MedicamentController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
             var medicament = _context.Medicaments.Find(id);
 
@@ -94,7 +97,7 @@ namespace ProjetTp.Controllers
         // POST: MedicamentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Medicament collection)
+        public ActionResult Delete(Guid id, Medicament collection)
         {
             var medicament = _context.Medicaments.Find(id);
 
