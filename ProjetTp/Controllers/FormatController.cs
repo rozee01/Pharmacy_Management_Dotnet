@@ -24,7 +24,15 @@ namespace ProjetTp.Controllers
         // GET: FormatController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            // Assuming _context is your database context
+            Format format = _context.Formats.Find(id);
+
+            if (format == null)
+            {
+                return NotFound(); // Or another appropriate action for a not found result
+            }
+
+            return View(format);
         }
 
         // GET: FormatController/Create
