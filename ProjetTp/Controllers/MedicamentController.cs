@@ -20,6 +20,7 @@ namespace ProjetTp.Controllers
         }
 
         // GET: MedicamentController/Details/5
+        public ActionResult Details(Guid id) 
         {
             var medicament = _context.Medicaments.Find(id);
 
