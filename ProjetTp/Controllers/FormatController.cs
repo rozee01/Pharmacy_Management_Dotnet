@@ -118,5 +118,14 @@ namespace ProjetTp.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Recherche(string nomFormat)
+        {
+            var formatList = from m in _context.Formats select m;
+            if (!string.IsNullOrEmpty(nomFormat))
+            {
+                formatList = formatList.Where(r => r.Name.Contains(nomFormat));
+            }
+            return View("Index", formatList.ToList());
+        }
     }
 }

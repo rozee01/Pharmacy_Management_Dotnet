@@ -112,5 +112,14 @@ namespace ProjetTp.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Recherche(string nomMed)
+        {
+            var medicamentList = from m in _context.Medicaments select m;
+            if (!string.IsNullOrEmpty(nomMed))
+            {
+                medicamentList = medicamentList.Where(r => r.Name.Contains(nomMed));
+            }
+            return View("Index",medicamentList.ToList());
+        }
     }
 }

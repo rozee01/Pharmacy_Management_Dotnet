@@ -1,76 +1,31 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-    margin-bottom: 60px;
-    background-color: #F0F3F2;
-}
-.login-logout-card .card-header {
-    padding: Opx Opx 12px Opx;
-    background-color: #F0F3F2;
-}
-
-. login-logout-card ul.nav-tabs {
-    margin: Opx Opx -12px Opx;
-}
-. login-logout-card li.nav-item {
-    width: 50%;
-}
-. login-logout-card a.nav-link{
-    font-size: 1rem;
-    color: #495057;
-    text-align: center;
-    padding: 1rem;
-}
-. login-logout-card .card-body {
-    padding: 10px 20px;
-    background-color: #FCF9F9;
-}
-nav {
-    position:relative;
-    z-index: 1000; /* ou toute valeur plus élevée que le z-index de la section about-area */
-}
-/*about us css start */
-/* About Area css
+ï»¿/* About Area css
 ============================================================================================ */
 .about-area {
     background: #f7f7f7;
     background-image: url(../img/background/bg_1.png);
-    background-size: revert;
+    background-size: cover;
     background-repeat: no-repeat;
     position: relative;
     padding-top: 400px;
     padding-bottom: 110px;
     margin-top: -160px;
-    z-index: 1;
 }
 
-    .about-area ::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 50%;
-        top: 0;
-        background: url(../img/banner/about1.png);
-        background-size: auto;
-        z-index: 11;
-        height: 100%;
-        background-repeat: no-repeat;
-        background-position: right bottom;
-    }
 
+
+.about-area ::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 50%;
+    top: 0;
+    background: url(../img/banner/about1.png);
+    background-size: auto;
+    z-index: 11;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
 @media (max-width: 991px) {
     .about-area:after {
         display: none;
@@ -142,9 +97,3 @@ nav {
     border-radius: 50%;
     margin-bottom: 20px;
 }
-site-section bg-light custom-border-bottom{
-    margin-top:200px;
-}
-
-
-/*about us end*/
