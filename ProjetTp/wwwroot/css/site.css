@@ -73,3 +73,113 @@ body {
     padding: 10px 20px;
     background-color: #FCF9F9;
 }
+nav {
+    position:relative;
+    z-index: 1000; /* ou toute valeur plus élevée que le z-index de la section about-area */
+}
+/*about us css start */
+/* About Area css
+============================================================================================ */
+.about-area {
+    background: #f7f7f7;
+    background-image: url(../img/background/bg_1.png);
+    background-size: revert;
+    background-repeat: no-repeat;
+    position: relative;
+    padding-top: 400px;
+    padding-bottom: 110px;
+    margin-top: -160px;
+    z-index: 1;
+}
+
+    .about-area ::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 50%;
+        top: 0;
+        background: url(../img/banner/about1.png);
+        background-size: auto;
+        z-index: 11;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+    }
+
+@media (max-width: 991px) {
+    .about-area:after {
+        display: none;
+    }
+}
+
+@media (min-width: 1199px) and (max-width: 1199px) {
+    .about-area .about-content {
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 991px) {
+    .about-area .about-content {
+        margin-top: 0;
+        padding-left: 0;
+    }
+
+        .about-area .about-content h4 br {
+            display: none;
+        }
+
+        .about-area .about-content p br {
+            display: none;
+        }
+}
+
+.about-area .about-content h4 {
+    font-size: 36px;
+    color: #33363e;
+    font-family: "Playfair Display", serif;
+    margin-bottom: 32px;
+    line-height: 46px;
+}
+
+.about-area .about-content h6 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #0051d2;
+    line-height: 25px;
+    margin-bottom: 25px;
+}
+
+.about-area .about-content p {
+    font-size: 15px;
+    margin-bottom: 30px;
+    line-height: 26px;
+}
+
+/*---------------------------------------------------- */
+
+.block-38 .block-38-header .block-38-heading {
+    color: #000;
+    margin: 0;
+    font-weight: 300;
+}
+
+.block-38 .block-38-header .block-38-subheading {
+    color: #b3b3b3;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: .1em;
+}
+
+.block-38-header img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+site-section bg-light custom-border-bottom{
+    margin-top:200px;
+}
+
+
+/*about us end*/

@@ -119,5 +119,14 @@ namespace ProjetTp.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult Recherche(string nomFab)
+        {
+            var fabriquantList = from m in _context.Fabriquants select m;
+            if (!string.IsNullOrEmpty(nomFab))
+            {
+                fabriquantList = fabriquantList.Where(r => r.Name.Contains(nomFab));
+            }
+            return View("Index", fabriquantList.ToList());
+        }
     }
 }
