@@ -14,8 +14,11 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
-    background-color: #F0F3F2;
+    line-height: 27px;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+    color: #797979;
 }
 .login-logout-card .card-header {
     padding: Opx Opx 12px Opx;
@@ -33,6 +36,38 @@ body {
     color: #495057;
     text-align: center;
     padding: 1rem;
+}
+.navbar {
+    background-color: #ffffff; 
+    border-bottom: 1px solid #e0e0e0; 
+}
+
+
+.navbar-brand {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+.navbar-nav .nav-item {
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-weight: bold; 
+}
+
+.navbar-nav .nav-link:hover {
+        color: #007bff; 
+}
+
+.navbar-toggler {
+    border: none; 
+}
+
+.navbar-toggler-icon {
+    background-color: azure;
 }
 . login-logout-card .card-body {
     padding: 10px 20px;
