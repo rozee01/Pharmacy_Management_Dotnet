@@ -173,12 +173,25 @@ namespace ProjetTp.Controllers
         }
         public ActionResult Recherche(string nomMed)
         {
-            var medicamentList = from m in _context.Medicaments select m;
-            if (!string.IsNullOrEmpty(nomMed))
+            var query = from medicament in _context.Medicaments
+                        join format in _context.Formats on medicament.FormatId equals format.Id
+                        join fabriquant in _context.Fabriquants on medicament.FabriquantId equals fabriquant.Id
+                        where nomMed == medicament.Name
+                        select new MedicamentJoinResult
+                        {
+                            Medicament = medicament,
+                            Format = format,
+                            Fabriquant = fabriquant
+                        };
+            var result = query.FirstOrDefault() != null ? new List<MedicamentJoinResult> { query.FirstOrDefault() } : new List<MedicamentJoinResult>();
+
+            if (result == null)
             {
-                medicamentList = medicamentList.Where(r => r.Name.Contains(nomMed));
+                return NotFound();
             }
-            return View("Index",medicamentList.ToList());
+
+            return View("Index", result);
         }
+
     }
 }

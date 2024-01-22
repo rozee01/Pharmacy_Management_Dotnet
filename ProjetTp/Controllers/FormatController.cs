@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.Server;
 using ProjetTp.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Format = ProjetTp.Models.Format;
 
 namespace ProjetTp.Controllers
@@ -124,8 +125,11 @@ namespace ProjetTp.Controllers
             if (!string.IsNullOrEmpty(nomFormat))
             {
                 formatList = formatList.Where(r => r.Name.Contains(nomFormat));
+                formatList.ToList();
             }
-            return View("Index", formatList.ToList());
+            else { formatList.ToList(); }
+
+            return View("Index", formatList);
         }
     }
 }
