@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
-
-
 <div style="display: flex; justify-content: space-between;">
-    <div>
+    <div class="create">
         <p>
             <a asp-action="Create">Create New</a>
         </p>
@@ -19,6 +16,7 @@
             <input type="text" id="searchInput" placeholder="Rechercher">
         </p>
     </div>
+
 </div>
 <table class="table">
     <thead>
